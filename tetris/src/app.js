@@ -72,6 +72,29 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  const displaySquares = document.querySelectorAll('.mini-grid div');
+  const displayWidth = 4;
+  let displayIndex = 0;
+  let nextRandomTetromino = 0;
+
+  const upNextTetrominoes = [
+    [1, displayWidth+1, displayWidth*2+1, 2], // lTetromino
+    [0, displayWidth, displayWidth+1, displayWidth*2+1], // zTetromino
+    [1, displayWidth, displayWidth+1, displayWidth+2], // tTetromino
+    [0, 1, displayWidth, displayWidth+1], // oTetromino
+    [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] // iTetromino
+  ]
+
+  function displayTheNextTetromino() {
+    displaySquares.forEach(square => {
+      square.classList.remove('tetromino');
+    });
+    upNextTetrominoes[nextRandomTetromino].forEach(index => {
+      displaySquares[displayIndex + index].classList.add('tetromino');
+    });
+    console.log(displaySquares);
+  }
+
   function moveDown() {
     undraw();
     currentPosition += GRID_WIDTH;
@@ -85,10 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
    if(current.some(index => squares[currentPosition + index + GRID_WIDTH].classList.contains('taken'))) {
     current.forEach(index => squares[currentPosition + index].classList.add('taken'));
     // randomly selected tetromino with random rotation
-    randomTetromino = Math.floor(Math.random()*theTetronimoes.length);
+    randomTetromino = nextRandomTetromino;
+    nextRandomTetromino = Math.floor(Math.random()*theTetronimoes.length);
     current = theTetronimoes[randomTetromino][currentRotation];
     currentPosition = 4;
     draw();
+    displayTheNextTetromino();
    }
   }
 
