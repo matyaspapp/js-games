@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         if(i < 90 && !isLeftEdge && squares[i-1+width].classList.contains('bomb')) total++;
         if(i < 88 && !isRightEdge && squares[i+1+width].classList.contains('bomb')) total++;
         if(i < 89 && squares[i+width].classList.contains('bomb')) total++;
-        squares[i].setAttribute('data', total)
+        squares[i].setAttribute('data', total);
       }
     }
   }
