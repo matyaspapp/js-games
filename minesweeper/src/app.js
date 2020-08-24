@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         const isLeftEdge = currentId % width === 0;
         const isRightEdge = currentId % width === width-1;
 
-        setTimeout(() => { // TODO: left bottom bug..
+        setTimeout(() => { // TODO: right bottom bug..
           if (currentId > 0 && !isLeftEdge) {
             const newId = squares[parseInt(currentId)-1].id;
             const newSquare = document.getElementById(newId);
